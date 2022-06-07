@@ -1,2 +1,7 @@
-# IFP-Prompt
-iFanpS Command Prompt , i make this because i am sick of CMD theme
+# IFP
+Self Command Prompt, created because i am sick of CMD shit theme
+I will try to make this full release soon
+
+# Changelog
+- Directory Management [X]
+- Etc [O]
