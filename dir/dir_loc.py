@@ -8,7 +8,12 @@ class dir:
         return os.getcwd()
     
     def change_dir(self, path):
-        return os.chdir(path)
+        try:
+            return os.chdir(path.split()[1])
+        except IndexError:
+            print("Path /> <" + os.getcwd() + ">")
+        except:
+            print("[i] System cannot find the specified path.")
 
     def listDir(self, curr_path):
         print(f"\n Listing Directories {curr_path}")
