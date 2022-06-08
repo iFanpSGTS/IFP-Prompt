@@ -65,7 +65,7 @@ else:
             if cmd.startswith("clear"):
                 CMDs.clear_prompt()
             if cmd.startswith("help"):
-                CMDs.help_cmd()
+                CMDs.help_cmd() 
             if cmd.startswith("echo"):
                 CMDs.print_text(cmd.replace("echo", ""))
             if cmd.startswith("ver"):
