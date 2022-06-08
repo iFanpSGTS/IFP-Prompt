@@ -1,4 +1,4 @@
-import os;from datetime import datetime
+import os, re;from datetime import datetime
 
 class dir:
     def __init__(self):
@@ -12,10 +12,10 @@ class dir:
             rmw = path.replace("cd", "")
             paths = re.sub("^\s+|\s+$", "", rmw, flags=re.UNICODE)
             return os.chdir(paths)
-        except IndexError:
-            print("Path /> <" + os.getcwd() + ">")
-        except:
+        except FileNotFoundError:
             print("[i] System cannot find the specified path.")
+        except:
+            print("Path /> <" + os.getcwd() + ">")
 
     def listDir(self, curr_path):
         print(f"\n Listing Directories {curr_path}")
@@ -28,13 +28,19 @@ class dir:
             print(f"[Find] > {isdir}")
             
     def makeDir(self, name_folder, curr_path):
-        path = os.path.join(curr_path, name_folder)
-        os.mkdir(path)
-        print(f"\n<{name_folder} (folder)> is Created [date : {datetime.today()}]")
+        try:
+            path = os.path.join(curr_path, name_folder.split()[1])
+            os.mkdir(path)
+            print(f"\n<{name_folder} (folder)> is Created [date : {datetime.today()}]")
+        except IndexError:
+            print("[x] Syntax is incorrect!")
     
     def createFile(self, name_file, curr_path):
-        path = os.path.join(curr_path, name_file)
-        with open(path, "w") as f:
-            f.write("")
-            f.close()
-        print(f"\n<{name_file} (file)> is Create [date : {datetime.today()}]")
+        try:
+            path = os.path.join(curr_path, name_file.split()[1])
+            with open(path, "w") as f:
+                f.write("")
+                f.close()
+            print(f"\n<{name_file} (file)> is Create [date : {datetime.today()}]")
+        except IndexError:
+            print("[x] Syntax is incorrect!")
