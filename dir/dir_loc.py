@@ -9,7 +9,9 @@ class dir:
     
     def change_dir(self, path):
         try:
-            return os.chdir(path.split()[1])
+            rmw = path.replace("cd", "")
+            paths = re.sub("^\s+|\s+$", "", rmw, flags=re.UNICODE)
+            return os.chdir(paths)
         except IndexError:
             print("Path /> <" + os.getcwd() + ">")
         except:
