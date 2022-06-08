@@ -23,46 +23,50 @@ if CMDs.isAdmin():
     while True:
         CMDs.change_title()
         cmd = input("\n"+SyntaxOrSymbol.format(dirs.curr_dir()))
-        if cmd.startswith("cd"):
-            dirs.change_dir(cmd)
-        if cmd.startswith("listdir"):
-            dirs.listDir(dirs.curr_dir())
-        if cmd.startswith("mkdir"):
-            dirs.makeDir(cmd.split()[1], dirs.curr_dir())
-        if cmd.startswith("mkfile"):
-            dirs.createFile(cmd.split()[1], dirs.curr_dir())
-        if cmd.startswith("date"):
-            CMDs.date()
-        if cmd.startswith("clear"):
-            CMDs.clear_prompt()
-        if cmd.startswith("help"):
-            CMDs.help_cmd()
-        if cmd.startswith("echo"):
-            CMDs.print_text(cmd.replace("echo", ""))
-        if cmd.startswith("ver"):
-            CMDs.platform("ver")
+        if cmd.split()[0] not in commds:
+            print("[X] Command is not recognized internal or external,\n operable program or batch")
+        else:
+            if cmd.startswith("cd"):
+                dirs.change_dir(cmd)
+            if cmd.startswith("listdir"):
+                dirs.listDir(dirs.curr_dir())
+            if cmd.startswith("mkdir"):
+                dirs.makeDir(cmd.split()[1], dirs.curr_dir())
+            if cmd.startswith("mkfile"):
+                dirs.createFile(cmd.split()[1], dirs.curr_dir())
+            if cmd.startswith("date"):
+                CMDs.date()
+            if cmd.startswith("clear"):
+                CMDs.clear_prompt()
+            if cmd.startswith("help"):
+                CMDs.help_cmd()
+            if cmd.startswith("echo"):
+                CMDs.print_text(cmd.replace("echo", ""))
+            if cmd.startswith("ver"):
+                CMDs.platform("ver")
 else:
     print(Information_ifNotRunAsAdmin)
     while True:
         CMDs.change_title()
         cmd = input("\n"+SyntaxOrSymbol.format(dirs.curr_dir()))
-        if cmd.startswith("cd"):
-            dirs.change_dir(cmd)
-        if cmd.startswith("listdir"):
-            CMDs.change_title("listdir")
-            dirs.listDir(dirs.curr_dir())
-        if cmd.startswith("mkdir"):
-            dirs.makeDir(cmd.split()[1], dirs.curr_dir())
-        if cmd.startswith("mkfile"):
-            dirs.createFile(cmd.split()[1], dirs.curr_dir())
-        if cmd.startswith("date"):
-            CMDs.date()
-        if cmd.startswith("clear"):
-            CMDs.change_title("clear")
-            CMDs.clear_prompt()
-        if cmd.startswith("help"):
-            CMDs.help_cmd()
-        if cmd.startswith("echo"):
-            CMDs.print_text(cmd.replace("echo", ""))
-        if cmd.startswith("ver"):
-            CMDs.platform("ver")
+        if cmd.split()[0] not in commds:
+            print("[X] Command is not recognized on internal or external,\n operable program or batch")
+        else:
+            if cmd.startswith("cd"):
+                dirs.change_dir(cmd)
+            if cmd.startswith("listdir"):
+                dirs.listDir(dirs.curr_dir())
+            if cmd.startswith("mkdir"):
+                dirs.makeDir(cmd.split()[1], dirs.curr_dir())
+            if cmd.startswith("mkfile"):
+                dirs.createFile(cmd.split()[1], dirs.curr_dir())
+            if cmd.startswith("date"):
+                CMDs.date()
+            if cmd.startswith("clear"):
+                CMDs.clear_prompt()
+            if cmd.startswith("help"):
+                CMDs.help_cmd()
+            if cmd.startswith("echo"):
+                CMDs.print_text(cmd.replace("echo", ""))
+            if cmd.startswith("ver"):
+                CMDs.platform("ver")
