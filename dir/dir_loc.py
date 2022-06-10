@@ -15,7 +15,7 @@ class dir:
         except Exception as e:
             defind_error(type(e).__name__)
         except:
-            defind_error("CDError")
+            defind_error("SyntaxError")
 
     def listDir(self, curr_path):
         print(f"\n Listing Directories {curr_path}")
