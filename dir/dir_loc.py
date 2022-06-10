@@ -1,4 +1,4 @@
-import os, re;from datetime import datetime
+import os, re;from datetime import datetime;from error import *
 
 class dir:
     def __init__(self):
@@ -12,10 +12,10 @@ class dir:
             rmw = path.replace("cd", "")
             paths = re.sub("^\s+|\s+$", "", rmw, flags=re.UNICODE)
             return os.chdir(paths)
-        except FileNotFoundError:
-            print("[i] System cannot find the specified path.")
+        except Exception as e:
+            defind_error(type(e).__name__)
         except:
-            print("Path /> <" + os.getcwd() + ">")
+            defind_error("CDError")
 
     def listDir(self, curr_path):
         print(f"\n Listing Directories {curr_path}")
@@ -32,8 +32,10 @@ class dir:
             path = os.path.join(curr_path, name_folder.split()[1])
             os.mkdir(path)
             print(f"\n<{name_folder} (folder)> is Created [date : {datetime.today()}]")
-        except IndexError:
-            print("[x] Syntax is incorrect!")
+        except Exception as e:
+            defind_error(type(e).__name__)
+        except:
+            defind_error("AdminError")
     
     def createFile(self, name_file, curr_path):
         try:
@@ -42,5 +44,7 @@ class dir:
                 f.write("")
                 f.close()
             print(f"\n<{name_file} (file)> is Create [date : {datetime.today()}]")
-        except IndexError:
-            print("[x] Syntax is incorrect!")
+        except Exception as e:
+            defind_error(type(e).__name__)
+        except:
+            defind_error("AdminError")
