@@ -10,7 +10,8 @@ errs = {
     "BaseException":"[x] BaseException error.",
     "AdminError":"[i] Please run as admin.",
     "CDError":"[dir] <{0}>".format(os.getcwd()),
-    "CommandNotFoundError":"[x] CMD is not available."
+    "CommandNotFoundError":"[x] CMD is not available.",
+    "OSError":"[dir] <{0}>".format(os.getcwd())
 }
 def defind_error(error):
     if error in errs.keys():
