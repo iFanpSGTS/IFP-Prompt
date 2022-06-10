@@ -4,4 +4,5 @@ I will try to make this full release soon
 
 # Changelog
 - [x] Directory Management
-- [ ] Other commands
+- [x] CMD & Error handler
+- [ ] TODO
