@@ -43,14 +43,21 @@ class CMD:
                 print(f"<{osname}> {platform.version()}")
         if arg == "crp":
             print(" \n [/] Checking all running program")
-            for i in psutil.win_service_iter():
+            for i in psutil.process_iter():
                 crp_count_program += 1
-                print(f"[> {i} </]")
+                print(f"[> Name : {i.name()} | PID : {i.pid} </]")
                 time.sleep(0.1)
-            if crp_count_program >= 700:
+            if crp_count_program >= 300:
                 print(Fore.RED + f"[warning] {crp_count_program} program is running, its to high." + Fore.GREEN)
             else:
                 print(f"[i] {crp_count_program} program is running.")
+        if arg == "crs":
+            print(" \n [/] Checking all running services")
+            for i in psutil.win_service_iter():
+                crs_count_service += 1
+                print(f"Service : {i.name()} | Name : {i.display_name()}")
+                time.sleep(0.1)
+            print(f"{crs_count_service} services is running.")
     
     def start_program(self, name_or_path):
         try:
