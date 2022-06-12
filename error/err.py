@@ -17,4 +17,4 @@ def defind_error(error):
     if error in errs.keys():
         print(errs.get(error))
     else:
-        print("[x] Cant proceed the error, from custom errorHandler.")
+        print("[x] Cant proceed the error, Err : {0}".format(error))
