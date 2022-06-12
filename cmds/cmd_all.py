@@ -1,24 +1,49 @@
 from datetime import date; import os, ctypes, platform,time
-
+import dir
 import psutil;from error import *;from art import *;from colorama import *
 
+dirs = dir.dir()
 help_commds = ["mkdir", "listdir", "mkfile", "date", "clear", "echo", "ver (display windows version)", "cd", "start", "crp (check running program)"]
-avai_commds = ["mkdir", "listdir", "mkfile", "date", "clear", "echo", "ver", "cd", "help", "start", "crp"]
+avai_commds = ["mkdir", "listdir", "mkfile", "date", "clear", "echo", "ver", "cd", "start", "crp", "crs"]
 init()
 
 class CMD:
     def __init__(self):
         pass
     
-    def check_available_cmd(self, cmd):
+    def cmd_handler(self, cmd):
         try:
-            if cmd.split()[0] not in avai_commds:
-                defind_error("CommandNotFoundError")
+            cmds = cmd.split()[0]
+            if cmds in avai_commds:
+                if cmds== "mkdir":
+                    dirs.makeDir(cmd, os.getcwd())
+                elif cmds== "listdir":
+                    dirs.listDir(cmd)
+                elif cmds== "mkfile":
+                    dirs.createFile(cmd, os.getcwd())
+                elif cmds== "date":
+                    self.date()
+                elif cmds== "clear":
+                    self.clear_prompt()
+                elif cmds== "echo":
+                    self.print_text(cmd)
+                elif cmds== "cd":
+                    dirs.change_dir(cmd)
+                elif cmds == "ver":
+                    self.platform("ver")
+                elif cmds == "start":
+                    self.start_program(cmd)
+                elif cmds == "crp":
+                    self.platform("crp")
+                elif cmds == "crs":
+                    self.platform("crs")
             else:
-                pass
+                defind_error("CommandNotFoundError")
+        except Exception as e:
+            defind_error(type(e).__name__)
         except:
-            pass
-    
+            defind_error("SyntaxError")
+            
     def Interface(self, isAdmin=False):
         if isAdmin == False:
             print(f"""{Fore.CYAN + text2art("IF Prompt")}
@@ -35,6 +60,7 @@ class CMD:
     def platform(self, arg):
         osname = os.name
         crp_count_program = 0
+        crs_count_service = 0
         if arg == "ver":
             if osname == "nt":
                 osname = "Windows"
