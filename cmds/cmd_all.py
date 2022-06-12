@@ -15,11 +15,12 @@ class CMD:
     def cmd_handler(self, cmd):
         try:
             cmds = cmd.split()[0]
+            self.change_title(cmds)
             if cmds in avai_commds:
                 if cmds== "mkdir":
                     dirs.makeDir(cmd, os.getcwd())
                 elif cmds== "listdir":
-                    dirs.listDir(cmd)
+                    dirs.listDir(os.getcwd())
                 elif cmds== "mkfile":
                     dirs.createFile(cmd, os.getcwd())
                 elif cmds== "date":
