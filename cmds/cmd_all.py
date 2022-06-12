@@ -3,7 +3,8 @@ import dir
 import psutil;from error import *;from art import *;from colorama import *
 
 dirs = dir.dir()
-help_commds = ["mkdir", "listdir", "mkfile", "date", "clear", "echo", "ver (display windows version)", "cd", "start", "crp (check running program)"]
+help_commds = ["mkdir", "listdir", "mkfile", "date", "clear", "echo", "ver (display windows version)", "cd", "start", "crp (check running program)",
+              "crs (check running service)"]
 avai_commds = ["mkdir", "listdir", "mkfile", "date", "clear", "echo", "ver", "cd", "start", "crp", "crs"]
 init()
 
@@ -71,21 +72,27 @@ class CMD:
                 print(f"<{osname}> {platform.version()}")
         if arg == "crp":
             print(" \n [/] Checking all running program")
-            for i in psutil.process_iter():
-                crp_count_program += 1
-                print(f"[> Name : {i.name()} | PID : {i.pid} </]")
-                time.sleep(0.1)
-            if crp_count_program >= 300:
-                print(Fore.RED + f"[warning] {crp_count_program} program is running, its to high." + Fore.GREEN)
-            else:
-                print(f"[i] {crp_count_program} program is running.")
+            try:
+                for i in psutil.process_iter():
+                    crp_count_program += 1
+                    print(f"[> Name : {i.name()} | PID : {i.pid} </]")
+                    time.sleep(0.1)
+                if crp_count_program >= 300:
+                    print(Fore.RED + f"[warning] {crp_count_program} program is running, its to high." + Fore.GREEN)
+                else:
+                    print(f"[i] {crp_count_program} program is running.")
+            except:
+                defind_error("KeyboardInterrupt")
         if arg == "crs":
             print(" \n [/] Checking all running services")
-            for i in psutil.win_service_iter():
-                crs_count_service += 1
-                print(f"Service : {i.name()} | Name : {i.display_name()}")
-                time.sleep(0.1)
-            print(f"{crs_count_service} services is running.")
+            try:
+                for i in psutil.win_service_iter():
+                    crs_count_service += 1
+                    print(f"Service : {i.name()} | Name : {i.display_name()}")
+                    time.sleep(0.1)
+                print(f"{crs_count_service} services is running.")
+            except:
+                defind_error("KeyboardInterrupt")
     
     def start_program(self, name_or_path):
         try:
