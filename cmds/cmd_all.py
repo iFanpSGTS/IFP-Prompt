@@ -37,6 +37,8 @@ class CMD:
                     self.platform("crp")
                 elif cmds == "crs":
                     self.platform("crs")
+                elif cmds == "help":
+                    self.help_cmd()
             else:
                 defind_error("CommandNotFoundError")
         except Exception as e:
