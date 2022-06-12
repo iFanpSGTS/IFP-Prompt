@@ -7,3 +7,6 @@ I will try to make this full release soon
 - [x] CMD & Error handler
 - [x] Input Sanitaize
 - [x] Exception Custom Handler 50/100
+
+# Preview
+![](preview.png)
