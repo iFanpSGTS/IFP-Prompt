@@ -99,7 +99,7 @@ class CMD:
         try:
             return os.startfile(f"{name_or_path.split()[1]}")
         except:
-            print("[i] Cannot run the specified program.")
+            defind_error("SyntaxError")
     
     def date(self):
         print(f"\nDate : [ Make sure u happy today :D ] <{date.today()}>")
@@ -129,4 +129,6 @@ class CMD:
                 print("[<>] " + i)
                 
     def print_text(self, text):
-        print(f"[ECHO]{text}")
+        rmw = text.replace("echo", "")
+        text = re.sub("^\s+|\s+$", "", rmw, flags=re.UNICODE)
+        print(f"[ECHO] - {text}")
