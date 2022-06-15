@@ -13,40 +13,36 @@ class CMD:
         pass
     
     def cmd_handler(self, cmd):
-        try:
-            cmds = cmd.split()[0]
-            self.change_title(cmds)
-            if cmds in avai_commds:
-                if cmds== "mkdir":
-                    dirs.makeDir(cmd, os.getcwd())
-                elif cmds== "listdir":
-                    dirs.listDir(os.getcwd())
-                elif cmds== "mkfile":
-                    dirs.createFile(cmd, os.getcwd())
-                elif cmds== "date":
-                    self.date()
-                elif cmds== "clear":
-                    self.clear_prompt()
-                elif cmds== "echo":
-                    self.print_text(cmd)
-                elif cmds== "cd":
-                    dirs.change_dir(cmd)
-                elif cmds == "ver":
-                    self.platform("ver")
-                elif cmds == "start":
-                    self.start_program(cmd)
-                elif cmds == "crp":
-                    self.platform("crp")
-                elif cmds == "crs":
-                    self.platform("crs")
-                elif cmds == "help":
-                    self.help_cmd()
-            else:
+        def cmd_handler(self, cmd):
+        match cmd.split()[0]:
+            case "help":
+                for i in help_commds:
+                    print(" CMD available:\n========================")
+                    print(f"{i}\n=========================")
+            case "mkdir":
+                dirs.makeDir(cmd, dirs.curr_dir())
+            case "cd":
+                dirs.change_dir(cmd)
+            case "listdir":
+                dirs.listDir(dirs.curr_dir())
+            case "mkfile":
+                dirs.createFile(cmd, dirs.curr_dir())
+            case "date":
+                self.date()
+            case "clear":
+                self.clear_prompt()
+            case "echo":
+                self.print_text(cmd)
+            case "ver":
+                self.platform("ver")
+            case "crp":
+                self.platform("crp")
+            case "crs":
+                self.platform("crs")
+            case "start":
+                self.start_program(cmd)
+            case i if i not in avai_commds:
                 defind_error("CommandNotFoundError")
-        except Exception as e:
-            defind_error(type(e).__name__)
-        except:
-            defind_error("SyntaxError")
             
     def Interface(self, isAdmin=False):
         if isAdmin == False:
@@ -125,7 +121,7 @@ class CMD:
             pass 
         else:
             print(" CMD Available:\n")
-            for i in help_commds:
+            for i in help_commds: 
                 print("[<>] " + i)
                 
     def print_text(self, text):
