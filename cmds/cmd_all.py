@@ -16,9 +16,9 @@ class CMD:
         def cmd_handler(self, cmd):
         match cmd.split()[0]:
             case "help":
+                print(" CMD available:\n========================")
                 for i in help_commds:
-                    print(" CMD available:\n========================")
-                    print(f"{i}\n=========================")
+                    print(i)
             case "mkdir":
                 dirs.makeDir(cmd, dirs.curr_dir())
             case "cd":
@@ -33,7 +33,7 @@ class CMD:
                 self.clear_prompt()
             case "echo":
                 self.print_text(cmd)
-            case "ver":
+            case "ver":                   
                 self.platform("ver")
             case "crp":
                 self.platform("crp")
