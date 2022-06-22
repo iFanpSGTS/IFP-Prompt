@@ -5,7 +5,8 @@ import psutil;from error import *;from art import *;from colorama import *
 dirs = dir.dir()
 help_commds = ["mkdir", "listdir", "mkfile", "date", "clear", "echo", "ver (display windows version)", "cd", "start", "crp (check running program)",
               "crs (check running service)"]
-avai_commds = ["mkdir", "listdir", "mkfile", "date", "clear", "echo", "ver", "cd", "start", "crp", "crs"]
+avai_commds = ["mkdir", "listdir", "mkfile", "date", "clear", "echo", "ver", "cd", "start", "crp", "crs",
+              "portscan", "speedtest"]
 init()
 
 class CMD:
@@ -41,6 +42,10 @@ class CMD:
                 self.platform("crs")
             case "start":
                 self.start_program(cmd)
+            case "portscan":
+                self.portscan(cmd)
+            case "speedtest":
+                self.wifitest()
             case i if i not in avai_commds:
                 defind_error("CommandNotFoundError")
             
@@ -56,6 +61,46 @@ class CMD:
     \tIFP Windows (run as admin) [{platform.version()}]
     \t(c) IFP CMD by iFanpS <2022>          
     """)
+    
+     def portscan(self, ip, min_port=80, max_port=100):
+        rmw = ip.replace("portscan", "")
+        ips = re.sub("^\s+|\s+$", "", rmw, flags=re.UNICODE)
+        ip_pattern = re.compile("^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$")
+        open_port = []
+        closed_port = []
+        
+        if ip_pattern.search(ips):
+            print("[✔️] Valid IPAddr")
+            for port in range(min_port, max_port + 1):
+                try:
+                    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as scan:
+                        scan.settimeout(0.5)
+                        scan.connect((ips,port))
+                        open_port.append(port)
+                except:
+                    closed_port.append(port)
+        else:
+            print("[❌] Invalid IPAddr")
+        for o_port in open_port:
+            print(f"- {o_port} Open | Opened on -> {ips} Address")
+        if len(closed_port) >= 1:
+            print(f"[{len(closed_port)}] is Closed on -> {ips} Address")
+    
+    def wifitest(self):
+        speedtests = speedtest.Speedtest()
+        check = re.compile("([1-9]+).([1-9]+)")
+        KB = 1024
+        MB = KB * 1024
+        
+        download = format(speedtests.download()/MB, ".2f")
+        upload = format(speedtests.upload()/MB, ".2f")
+        ping = int(speedtests.results.ping)
+        
+        print(f" Checking you're ping..\n Ping : {ping}ms")
+        if check.search(download) or check.search(upload):
+            print(f"\n[✔️] Download : {download} Mbps | Upload : {upload} Mbps")
+        else:
+            print(f"\n[✔️] Download : {download} Kbps | Upload : {upload} Kbps")
     
     def platform(self, arg):
         osname = os.name
