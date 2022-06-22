@@ -89,8 +89,7 @@ class CMD:
     def wifitest(self):
         speedtests = speedtest.Speedtest()
         check = re.compile("([1-9]+).([1-9]+)")
-        KB = 1024
-        MB = KB * 1024
+        MB = 1024 * 1024
         
         download = format(speedtests.download()/MB, ".2f")
         upload = format(speedtests.upload()/MB, ".2f")
